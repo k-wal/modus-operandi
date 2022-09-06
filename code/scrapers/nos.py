@@ -59,7 +59,7 @@ class NOSScraper:
 		self.write_day_articles(all_articles, date_string, dir_path)
 
 	# get articles in the given interval (both dates included; format yyyy-mm-dd)
-	def get_interval_articles(self, start_string, end_string, dir_path = '../../nos'):
+	def get_interval_articles(self, start_string, end_string, dir_path = '../../corpus/nos'):
 		start_date = datetime.datetime.strptime(start_string, "%Y-%m-%d")
 		end_date = datetime.datetime.strptime(end_string, "%Y-%m-%d")
 
