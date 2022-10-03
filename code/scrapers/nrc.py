@@ -4,26 +4,23 @@ import os
 import datetime
 import time
 
-class NOSScraper:
+class NRCScraper:
 
 	def __init__(self):
-		self.main_url = 'https://nos.nl'
-
+		self.main_url = 'https://www.nrc.nl'
 
 	# return title, text for a particular article
 	def get_text(self, url):
 		r = requests.get(url)
 		soup = BeautifulSoup(r.content, 'html.parser')
-		title = soup.find('title').text
+		title = soup.find('meta', property='og:title')['content']
 		
-		text = ''
-		divs = soup.findAll('div', 'sc-daa8fdde-1 kDUyiX')
+		text = []
+		divs = soup.findAll('div', 'content article__content')
 		for div in divs:
-			if div.find('aside'):
-				continue
-			p = div.find('p', 'sc-d176aaed-0 blKpuK')
-			if p:
-				text += ' ' + p.text
+			for p in div.findAll('p'):
+				text.append(p.text)
+		text = ' '.join(text)
 		return title, text
 
 	# write a day's articles
@@ -41,28 +38,26 @@ class NOSScraper:
 	# format of date_string: yyyy-mm-dd
 	def get_day_articles(self, date_string, dir_path):
 		print('\n'+ date_string + '------------------- \n')
-		url = 'https://nos.nl/nieuws/archief/' + date_string
+		url = self.main_url + '/nieuws/' + date_string.replace('-','/') + '/'
 		all_articles = []
 		r = requests.get(url)
 		soup = BeautifulSoup(r.content,'html.parser')
-
-		li_list = soup.findAll('li', 'list-time__item')
-		for li in li_list:
-			href = li.find('a')
-			link = self.main_url + href['href']
+		divs = soup.findAll('div', class_='nmt-item__inner')
+		for index, div in enumerate(divs):
+			link = self.main_url + '/' + div.find('a', class_='nmt-item__link')['href']
 			try:
 				title, text = self.get_text(link)
 			except:
 				print("ERROR")
 				continue
-			print(title)
+			print(index, title)
 			article = {'date':date_string, 'url':link, 'title':title, 'text':text}
 			all_articles.append(article)
 
 		self.write_day_articles(all_articles, date_string, dir_path)
 
 	# get articles in the given interval (both dates included; format yyyy-mm-dd)
-	def get_interval_articles(self, start_string, end_string, dir_path = '../../corpus/nos'):
+	def get_interval_articles(self, start_string, end_string, dir_path = '../../corpus/nrc'):
 		start_date = datetime.datetime.strptime(start_string, "%Y-%m-%d")
 		end_date = datetime.datetime.strptime(end_string, "%Y-%m-%d")
 
@@ -79,10 +74,8 @@ class NOSScraper:
 
 # date_string = '2022-08-01'
 # dir_path = '../../corpus/nos/2022-08'
-start_string = '2022-06-22'
-end_string = '2022-06-30'
+start_string = '2022-08-01'
+end_string = '2022-08-31'
 
-scraper = NOSScraper()
+scraper = NRCScraper()
 scraper.get_interval_articles(start_string, end_string)
-# scraper.get_day_articles(date_string, dir_path)
-

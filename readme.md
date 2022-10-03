@@ -1,0 +1,2 @@
+- for dutch NER: 
+	- flair (https://huggingface.co/flair/ner-dutch-large)
