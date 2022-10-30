@@ -4,22 +4,22 @@ import os
 import datetime
 import time
 
-class NRCScraper:
+class VolkskrantScraper:
 
 	def __init__(self):
-		self.main_url = 'https://www.nrc.nl'
+		self.main_url = 'https://www.volkskrant.nl'
 
 	# return title, text for a particular article
 	def get_text(self, url):
 		r = requests.get(url)
 		soup = BeautifulSoup(r.content, 'html.parser')
 		title = soup.find('meta', property='og:title')['content']
-		
+	
 		text = []
-		divs = soup.findAll('div', 'content article__content')
-		for div in divs:
-			for p in div.findAll('p'):
-				text.append(p.text)
+		paras = soup.findAll('p', class_="artstyle__paragraph")
+		for p in paras:
+			text.append(p.text.strip())
+
 		text = ' '.join(text)
 		return title, text
 
@@ -38,13 +38,13 @@ class NRCScraper:
 	# format of date_string: yyyy-mm-dd
 	def get_day_articles(self, date_string, dir_path):
 		print('\n'+ date_string + '------------------- \n')
-		url = self.main_url + '/nieuws/' + date_string.replace('-','/') + '/'
+		url = self.main_url + '/archief/' + date_string.replace('-','/')
 		all_articles = []
 		r = requests.get(url)
 		soup = BeautifulSoup(r.content,'html.parser')
-		divs = soup.findAll('div', class_='nmt-item__inner')
+		divs = soup.findAll('article')
 		for index, div in enumerate(divs):
-			link = self.main_url + '/' + div.find('a', class_='nmt-item__link')['href']
+			link = self.main_url + div.find('a')['href']
 			try:
 				title, text = self.get_text(link)
 			except:
@@ -57,7 +57,7 @@ class NRCScraper:
 		self.write_day_articles(all_articles, date_string, dir_path)
 
 	# get articles in the given interval (both dates included; format yyyy-mm-dd)
-	def get_interval_articles(self, start_string, end_string, dir_path = '../../corpus/nrc'):
+	def get_interval_articles(self, start_string, end_string, dir_path = '../../corpus/telegraaf'):
 		start_date = datetime.datetime.strptime(start_string, "%Y-%m-%d")
 		end_date = datetime.datetime.strptime(end_string, "%Y-%m-%d")
 
@@ -72,10 +72,6 @@ class NRCScraper:
 			cur_date += datetime.timedelta(days=1)	
 
 
-# date_string = '2022-08-01'
-# dir_path = '../../corpus/nos/2022-08'
-start_string = '2022-09-01'
-end_string = '2022-09-30'
 
-scraper = NRCScraper()
-scraper.get_interval_articles(start_string, end_string)
+scraper = VolkskrantScraper()
+scraper.get_interval_articles('2022-07-01', '2022-07-31')

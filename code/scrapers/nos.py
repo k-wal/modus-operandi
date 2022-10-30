@@ -79,8 +79,8 @@ class NOSScraper:
 
 # date_string = '2022-08-01'
 # dir_path = '../../corpus/nos/2022-08'
-start_string = '2022-06-22'
-end_string = '2022-06-30'
+start_string = '2022-09-01'
+end_string = '2022-09-30'
 
 scraper = NOSScraper()
 scraper.get_interval_articles(start_string, end_string)
