@@ -74,8 +74,8 @@ class NRCScraper:
 
 # date_string = '2022-08-01'
 # dir_path = '../../corpus/nos/2022-08'
-start_string = '2022-08-01'
-end_string = '2022-08-31'
+start_string = '2022-07-01'
+end_string = '2022-07-31'
 
 scraper = NRCScraper()
 scraper.get_interval_articles(start_string, end_string)
