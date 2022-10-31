@@ -4,10 +4,10 @@ import os
 import datetime
 import time
 
-class VolkskrantScraper:
+class ParoolScraper:
 
 	def __init__(self):
-		self.main_url = 'https://www.volkskrant.nl'
+		self.main_url = 'https://www.parool.nl'
 
 	# return title, text for a particular article
 	def get_text(self, url):
@@ -57,7 +57,7 @@ class VolkskrantScraper:
 		self.write_day_articles(all_articles, date_string, dir_path)
 
 	# get articles in the given interval (both dates included; format yyyy-mm-dd)
-	def get_interval_articles(self, start_string, end_string, dir_path = '../../corpus/volkskrant'):
+	def get_interval_articles(self, start_string, end_string, dir_path = '../../corpus/parool'):
 		start_date = datetime.datetime.strptime(start_string, "%Y-%m-%d")
 		end_date = datetime.datetime.strptime(end_string, "%Y-%m-%d")
 
@@ -73,5 +73,5 @@ class VolkskrantScraper:
 
 
 
-scraper = VolkskrantScraper()
-scraper.get_interval_articles('2022-07-01', '2022-07-31')
+scraper = ParoolScraper()
+scraper.get_interval_articles('2022-09-01', '2022-09-30')
