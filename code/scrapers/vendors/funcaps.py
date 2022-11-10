@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 import os
 import datetime
 import time
+import requests
 
 class FuncapsScraper():
 	def __init__(self):
