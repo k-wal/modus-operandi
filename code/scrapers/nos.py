@@ -47,7 +47,7 @@ class NOSScraper:
 		soup = BeautifulSoup(r.content,'html.parser')
 
 		li_list = soup.findAll('li', 'list-time__item')
-		for li in li_list:
+		for index, li in enumerate(li_list):
 			href = li.find('a')
 			link = self.main_url + href['href']
 			try:
@@ -55,7 +55,7 @@ class NOSScraper:
 			except:
 				print("ERROR")
 				continue
-			print(title)
+			print(index, title)
 			article = {'date':date_string, 'url':link, 'title':title, 'text':text}
 			all_articles.append(article)
 
@@ -77,12 +77,8 @@ class NOSScraper:
 			cur_date += datetime.timedelta(days=1)	
 
 
-# date_string = '2022-08-01'
-# dir_path = '../../corpus/nos/2022-08'
-start_string = '2022-09-01'
-end_string = '2022-09-30'
+start_string = '2021-09-01'
+end_string = '2021-12-31'
 
 scraper = NOSScraper()
 scraper.get_interval_articles(start_string, end_string)
-# scraper.get_day_articles(date_string, dir_path)
-
