@@ -58,7 +58,8 @@ class DetailScraper():
 
 #url = 'https://funcaps.nl'
 #url = 'https://homechemistry.nl/shop/chemicals/'
-url = 'https://realchems.nl/'
+#url = 'https://realchems.nl/'
+url = 'https://professor.nl/'
 
 scraper = DetailScraper()
 scraper.get_details(url)
