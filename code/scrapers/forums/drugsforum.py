@@ -143,8 +143,8 @@ class DrugsForumScraper():
 
 
 scraper = DrugsForumScraper()
-# for i in range(1,5):
-# 	scraper.get_threads(i)
+for i in range(1,48):
+	scraper.get_threads(i)
 
-url = 'https://drugsforum.nl/threads/4f-mph-of-3-cmc.73388/'
-scraper.get_comments_of_thread(url)
+# url = 'https://drugsforum.nl/threads/4f-mph-of-3-cmc.73388/'
+# scraper.get_comments_of_thread(url)
