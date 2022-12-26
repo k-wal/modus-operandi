@@ -29,6 +29,7 @@ class Thread():
 		'date' : self.date
 		}
 
+# generic class for comments of all forums
 class Comment():
 	def __init__(self, content='', comment_id=000, username='sample user', user_url='', user_id = '000', date='00-00-00', forum='',
 		thread_id=000, thread_url=''):

@@ -6,7 +6,7 @@ import time
 from classes import *
 import pandas as pd
 
-class DrugsForumThread(Thread):
+class DrugsForumNLThread(Thread):
 	# get thread content here; everything else should be done through drugsforumscraper
 	def get_thread_content(self):
 		r = requests.get(self.url)
@@ -14,10 +14,10 @@ class DrugsForumThread(Thread):
 		self.content = soup.find('article', class_='message-body js-selectToQuote').text.replace('\n',' ')
 
 # main drugsforum.nl scraper
-class DrugsForumScraper():
+class DrugsForumNLScraper():
 	def __init__(self):
 		self.url = 'https://drugsforum.nl'
-		self.dir_path = '../../../corpus/forums/drugsforum'
+		self.dir_path = '../../../corpus/forums/drugsforumNL'
 
 	# write list of Thread objects in a csv file
 	def write_threads(self, threads, page):
@@ -80,7 +80,7 @@ class DrugsForumScraper():
 			if 'K' in thread_views:
 				thread_views = int(thread_views.split('K')[0])*1000
 
-			threads.append(DrugsForumThread(
+			threads.append(DrugsForumNLThread(
 				url = thread_url,
 				title = thread_title,
 				username = thread_username,
@@ -90,7 +90,7 @@ class DrugsForumScraper():
 				views = thread_views,
 				comments = thread_comments,
 				thread_id = thread_id,
-				forum = 'drugsforum'
+				forum = 'drugsforum-nl'
 			))
 
 		for i,thread in enumerate(threads):
@@ -137,12 +137,12 @@ class DrugsForumScraper():
 				thread_url = thread_url, 
 				content = content, 
 				date = comment_date,
-				forum = 'drugsforum'))
+				forum = 'drugsforum-nl'))
 			print(comment_username)
 		self.write_comments(comments)	
 
 
-scraper = DrugsForumScraper()
+scraper = DrugsForumNLScraper()
 for i in range(1,48):
 	scraper.get_threads(i)
 
