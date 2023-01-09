@@ -7,7 +7,7 @@ from classes import *
 import pandas as pd
 
 
-class DrugsForumNLThread(Thread):
+class DrugsForumInfoThread(Thread):
 	# get thread content and date here; everything else should be done through drugsforumscraper
 	def get_thread_date_content(self):
 		month_dict = {'jan':'01',
@@ -46,6 +46,38 @@ class DrugsForumNLThread(Thread):
 		
 		return date, content
 
+
+class DrugsForumInfoComment(Comment):
+
+	def get_comment_date(self, post):
+		month_dict = {'jan':'01',
+		'feb':'01',
+		'maart':'03',
+		'apr':'04',
+		'mei':'05',
+		'jun':'06',
+		'jul':'07',
+		'aug':'08',
+		'sep':'09',
+		'okt':'10',
+		'nov':'11',
+		'dec':'12',
+		}
+
+		try:
+			par = post.find('p', class_='author')
+			text = par.text.replace(par.find('strong').text, '')
+			text = text[8:].split(' ')
+			month = month_dict[text[1]]
+			date = text[2].replace(',','')
+			year = text[3]
+			date = '-'.join([year, month, date])
+		except:
+			print(self.thread_url)
+			date='something'		
+
+		return date
+
 # main drugsforum.info scraper
 class DrugsForumInfoScraper():
 	def __init__(self):
@@ -60,18 +92,23 @@ class DrugsForumInfoScraper():
 		df = pd.DataFrame.from_records([t.to_dict() for t in threads])
 		
 		if page == 1:
-			df.to_csv(dir_path + '/all.csv', index=False, sep=',')
+			df.to_csv(dir_path + '/drugsforuminfo_threads.csv', index=False, sep=',')
 		else:
-			df.to_csv(dir_path + '/all.csv', mode='a', index=False, header=False, sep=',')
+			df.to_csv(dir_path + '/drugsforuminfo_threads.csv', mode='a', index=False, header=False, sep=',')
 
 	# write list of Comment objects in a csv file
-	def write_comments(self, comments):
+	def write_comments(self, comments, page):
 		dir_path = self.dir_path + '/comments'
 		if not os.path.isdir(dir_path):
 			os.makedirs(dir_path)
 		df = pd.DataFrame.from_records([c.to_dict() for c in comments])
-		df.to_csv(dir_path + '/all.csv', index=False, sep=',')
+		if page == 1:	# if comments are from page 1 of threads, rewrite existing file
+			df.to_csv(dir_path + '/drugsforuminfo_comments.csv', index=False, sep=',')
+		else:
+			df.to_csv(dir_path + '/drugsforuminfo_comments.csv', index=False, sep=',', mode='a')
 
+
+	# extract link of next page and call get_threads() function on the page
 	def get_next_page(self, page, url):
 		r = requests.get(url)
 		soup = BeautifulSoup(r.content, 'html.parser')
@@ -85,11 +122,45 @@ class DrugsForumInfoScraper():
 			self.get_threads(page=page+1, url=a['href'])
 			break
 
+	# get comments of a particular thread
+	def get_comments_of_thread(self, url):
+		thread_id = int(url.split('/')[-1].split('-')[-1].split('.')[0][1:])
+		comments = []
 
-	# get threads and their details and call write function
+		r = requests.get(url)
+		soup = BeautifulSoup(r.content, 'html.parser')
+		posts = soup.findAll('div', class_='postbody')
+		profiles = soup.findAll(class_='postprofile')
+
+		for post, profile in zip(posts[1:], profiles[1:]):
+			content = post.find('div', class_='content').text.strip().replace('\n', ' ')
+			try:
+				comment_username = profile.find('dt').text.strip()
+			except:
+				comment_username = 'something'
+
+			try:
+				comment_user_url = profile.find('dt').find('a')['href']
+			except:
+				comment_user_url = ''
+#			print(comment_username)
+			comment = DrugsForumInfoComment(
+				user_url = comment_user_url,
+				username = comment_username,
+				thread_id = thread_id,
+				thread_url = url,
+				content = content,
+				forum = 'drugsforum-info')
+			comment.date = comment.get_comment_date(post)
+			comments.append(comment)
+
+		return comments
+
+	# get threads and their details and call write function; also get comments
 	def get_threads(self, page=1, url = 'http://drugsforum.info/research-chemicals/'):
 		print("page: ", page)
 		threads = []
+		comments = []
 		r = requests.get(url)
 		soup = BeautifulSoup(r.content, 'html.parser')
 
@@ -111,7 +182,8 @@ class DrugsForumInfoScraper():
 			thread_user_url = user_a['href']
 			thread_id = int(thread_url.split('/')[-1].split('-')[-1].split('.')[0][1:])
 
-			threads.append(DrugsForumNLThread(
+#			print(thread_title)
+			threads.append(DrugsForumInfoThread(
 				url = thread_url,
 				title = thread_title,
 				username = thread_username,
@@ -122,14 +194,21 @@ class DrugsForumInfoScraper():
 				thread_id = thread_id,
 				forum = 'drugsforum-info'
 			))
+
+			# add comments of current thread to list of comments
+			comments.extend(self.get_comments_of_thread(thread_url))
 		
 		for i,thread in enumerate(threads):
 			threads[i].date, threads[i].content = thread.get_thread_date_content()
 			print(i,thread.thread_id, thread.title)
 
 		self.write_threads(threads, page)
+		self.write_comments(comments, page)
 		# get link to next page from the page
 		self.get_next_page(page, url)
 
 scraper = DrugsForumInfoScraper()
 scraper.get_threads()
+
+# url = 'http://drugsforum.info/research-chemicals/research-chemicals-leesmij-t99.html'
+# scraper.get_comments_of_thread(url)

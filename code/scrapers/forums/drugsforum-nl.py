@@ -27,23 +27,27 @@ class DrugsForumNLScraper():
 		df = pd.DataFrame.from_records([t.to_dict() for t in threads])
 		
 		if page == 1:
-			df.to_csv(dir_path + '/all.csv', index=False, sep=',')
+			df.to_csv(dir_path + '/drugsforumnl_threads.csv', index=False, sep=',')
 		else:
-			df.to_csv(dir_path + '/all.csv', mode='a', index=False, header=False, sep=',')
+			df.to_csv(dir_path + '/drugsforumnl_threads.csv', mode='a', index=False, header=False, sep=',')
 
 	# write list of Comment objects in a csv file
-	def write_comments(self, comments):
+	def write_comments(self, comments, page):
 		dir_path = self.dir_path + '/comments'
 		if not os.path.isdir(dir_path):
 			os.makedirs(dir_path)
 		df = pd.DataFrame.from_records([c.to_dict() for c in comments])
-		df.to_csv(dir_path + '/all.csv', index=False, sep=',')
+		if page == 1:
+			df.to_csv(dir_path + '/drugsforumnl_comments.csv', index=False, sep=',')
+		else:
+			df.to_csv(dir_path + '/drugsforumnl_comments.csv', index=False, sep=',', mode='a')	
 
 	# get threads and their details and call write function
 	def get_threads(self, page=1):
 		print("page: ", page)
 		url = 'https://drugsforum.nl/forums/research-chemicals.37/page-'+str(page)+'?order=post_date&direction=desc'
 		threads = []
+		comments = []
 		r = requests.get(url)
 		soup = BeautifulSoup(r.content, 'html.parser')
 		divs = soup.findAll('div', class_='structItem-cell structItem-cell--main')
@@ -93,11 +97,15 @@ class DrugsForumNLScraper():
 				forum = 'drugsforum-nl'
 			))
 
+			comments.extend(self.get_comments_of_thread(thread_url))
+
 		for i,thread in enumerate(threads):
 			thread.get_thread_content()
 			print(i,thread.thread_id, thread.title)
 		self.write_threads(threads, page)
+		self.write_comments(comments, page)
 
+	# return all comments of thread_url in argument 
 	def get_comments_of_thread(self, thread_url):
 		comments = []
 		r = requests.get(thread_url)
@@ -107,14 +115,23 @@ class DrugsForumNLScraper():
 		for article in articles:
 			#comment_username = article['data-author']
 			h4 = article.find('h4')
-			comment_user_url = self.url + h4.find('a')['href']
-			comment_username = h4.text
-			comment_user_id = h4.find('a')['data-user-id']
+			try:
+				comment_user_url = self.url + h4.find('a')['href']
+			except:
+				comment_user_url = ''
+			try:
+				comment_username = h4.text
+			except:
+				comment_username = 'something'
+			try:
+				comment_user_id = h4.find('a')['data-user-id']
+			except:
+				comment_user_id = 'something'
 
 			comment_id = int(article['data-content'].split('-')[-1])
 			comment_date = article.find('time')['datetime'][0:10]
 
-			thread_id = int(thread_url.split('.')[-1].replace('/',''))
+			thread_id = int(thread_url.split('.')[-1].replace('/','')[0:5])
 
 			# getting content of comment and removing quoted parts from it
 			message_body = article.find('article', class_="message-body")
@@ -138,13 +155,17 @@ class DrugsForumNLScraper():
 				content = content, 
 				date = comment_date,
 				forum = 'drugsforum-nl'))
-			print(comment_username)
-		self.write_comments(comments)	
+#			print(comment_username)
+		
+		next_page = soup.find('a', class_='pageNavSimple-el--next')
+		if next_page:
+			comments.extend(self.get_comments_of_thread(self.url+next_page['href']))
+		return comments
 
 
 scraper = DrugsForumNLScraper()
 for i in range(1,48):
 	scraper.get_threads(i)
 
-# url = 'https://drugsforum.nl/threads/4f-mph-of-3-cmc.73388/'
+# url = 'https://drugsforum.nl/threads/er-zat-iets-extra-bij-bestelling.73565/'
 # scraper.get_comments_of_thread(url)
