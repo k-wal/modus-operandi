@@ -157,6 +157,7 @@ class DrugsForumNLScraper():
 				forum = 'drugsforum-nl'))
 #			print(comment_username)
 		
+		# if next page exists, get comments from it
 		next_page = soup.find('a', class_='pageNavSimple-el--next')
 		if next_page:
 			comments.extend(self.get_comments_of_thread(self.url+next_page['href']))

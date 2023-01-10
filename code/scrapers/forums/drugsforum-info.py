@@ -122,6 +122,25 @@ class DrugsForumInfoScraper():
 			self.get_threads(page=page+1, url=a['href'])
 			break
 
+	# return comments of all next pages combined
+	def get_next_page_comments(self, url):
+		comments = []
+		r = requests.get(url)
+		soup = BeautifulSoup(r.content, 'html.parser')
+		page_actions = soup.find('form', action=url)
+		if not page_actions:
+			return comments
+		links = page_actions.findAll('a')
+		for a in links:
+			# only take the a tag that refers to next page
+			if a.text != 'Volgende':
+				continue
+			# call function to get comments of next thread
+			comments = self.get_comments_of_thread(url=a['href'])
+			break
+		return comments
+
+
 	# get comments of a particular thread
 	def get_comments_of_thread(self, url):
 		thread_id = int(url.split('/')[-1].split('-')[-1].split('.')[0][1:])
@@ -138,6 +157,7 @@ class DrugsForumInfoScraper():
 				comment_username = profile.find('dt').text.strip()
 			except:
 				comment_username = 'something'
+#			print(comment_username)
 
 			try:
 				comment_user_url = profile.find('dt').find('a')['href']
@@ -153,6 +173,7 @@ class DrugsForumInfoScraper():
 				forum = 'drugsforum-info')
 			comment.date = comment.get_comment_date(post)
 			comments.append(comment)
+		comments.extend(self.get_next_page_comments(url))
 
 		return comments
 
@@ -210,5 +231,5 @@ class DrugsForumInfoScraper():
 scraper = DrugsForumInfoScraper()
 scraper.get_threads()
 
-# url = 'http://drugsforum.info/research-chemicals/research-chemicals-leesmij-t99.html'
+# url = 'http://drugsforum.info/research-chemicals/4-ho-met-t3123.html'
 # scraper.get_comments_of_thread(url)
