@@ -20,32 +20,46 @@ class DrugsForumNLScraper():
 		self.dir_path = '../../../corpus/forums/drugsforumNL'
 
 	# write list of Thread objects in a csv file
-	def write_threads(self, threads, page):
+	def write_threads(self, threads, page, category):
 		dir_path = self.dir_path + '/threads'
 		if not os.path.isdir(dir_path):
 			os.makedirs(dir_path)
 		df = pd.DataFrame.from_records([t.to_dict() for t in threads])
 		
 		if page == 1:
-			df.to_csv(dir_path + '/drugsforumnl_threads.csv', index=False, sep=',')
+			df.to_csv(dir_path + '/' + category + 'drugsforumnl_threads.csv', index=False, sep=',')
 		else:
-			df.to_csv(dir_path + '/drugsforumnl_threads.csv', mode='a', index=False, header=False, sep=',')
+			df.to_csv(dir_path + '/' + category + 'drugsforumnl_threads.csv', mode='a', index=False, header=False, sep=',')
 
 	# write list of Comment objects in a csv file
-	def write_comments(self, comments, page):
+	def write_comments(self, comments, page, category):
 		dir_path = self.dir_path + '/comments'
 		if not os.path.isdir(dir_path):
 			os.makedirs(dir_path)
 		df = pd.DataFrame.from_records([c.to_dict() for c in comments])
 		if page == 1:
-			df.to_csv(dir_path + '/drugsforumnl_comments.csv', index=False, sep=',')
+			df.to_csv(dir_path + '/' + category + 'drugsforumnl_comments.csv', index=False, sep=',')
 		else:
-			df.to_csv(dir_path + '/drugsforumnl_comments.csv', index=False, sep=',', mode='a')	
+			df.to_csv(dir_path + '/' + category + 'drugsforumnl_comments.csv', index=False, sep=',', mode='a')	
+
+	def get_all_category_threads(self):
+		# for i in range(1,48):
+		# 	self.get_threads('research_chemicals',i)
+		for i in range(1,117):
+			self.get_threads('drugs_general',i)
+		# for i in range(1,114):
+		# 	self.get_threads('trip_reports',i)
 
 	# get threads and their details and call write function
-	def get_threads(self, page=1):
+	def get_threads(self, category, page=1):
 		print("page: ", page)
-		url = 'https://drugsforum.nl/forums/research-chemicals.37/page-'+str(page)+'?order=post_date&direction=desc'
+		if category == 'research_chemicals':
+			url = 'https://drugsforum.nl/forums/research-chemicals.37/page-'+str(page)+'?order=post_date&direction=desc'
+		if category == 'drugs_general':
+			url = 'https://drugsforum.nl/forums/drugs.10/page-'+str(page)+'?order=post_date&direction=desc'
+		if category == 'trip_reports':
+			url = 'https://drugsforum.nl/forums/trip-reports.21/page-'+str(page)+'?order=post_date&direction=desc'
+		print(url)
 		threads = []
 		comments = []
 		r = requests.get(url)
@@ -56,8 +70,11 @@ class DrugsForumNLScraper():
 			sticky_i = div.find('i', class_='structItem-status structItem-status--sticky')
 			if sticky_i:
 				continue
-			
+				
 			title_div = div.find('div', class_='structItem-title')
+			if not title_div:
+				print("TITLE DIV ERROR")
+				continue
 			thread_url = self.url + title_div.find('a')['href']
 			try:
 				thread_id = int(thread_url.split('.')[-1].replace('/',''))
@@ -102,8 +119,8 @@ class DrugsForumNLScraper():
 		for i,thread in enumerate(threads):
 			thread.get_thread_content()
 			print(i,thread.thread_id, thread.title)
-		self.write_threads(threads, page)
-		self.write_comments(comments, page)
+		self.write_threads(threads, page, category)
+		self.write_comments(comments, page, category)
 
 	# return all comments of thread_url in argument 
 	def get_comments_of_thread(self, thread_url):
@@ -165,8 +182,9 @@ class DrugsForumNLScraper():
 
 
 scraper = DrugsForumNLScraper()
-for i in range(1,48):
-	scraper.get_threads(i)
+scraper.get_all_category_threads()
+# for i in range(1,48):
+# 	scraper.get_threads(i)
 
 # url = 'https://drugsforum.nl/threads/er-zat-iets-extra-bij-bestelling.73565/'
 # scraper.get_comments_of_thread(url)

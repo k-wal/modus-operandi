@@ -6,7 +6,6 @@ import time
 from classes import *
 import pandas as pd
 
-
 class DrugsForumInfoThread(Thread):
 	# get thread content and date here; everything else should be done through drugsforumscraper
 	def get_thread_date_content(self):
