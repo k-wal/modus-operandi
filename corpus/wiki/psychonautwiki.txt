@@ -1,0 +1,129 @@
+1P-LSD||1-Propionyl-d-lysergic acid diethylamide
+25B-NBOMe||2C-B-NBOMe||BOM 2-CB||Cimbi-36||New Nexus||Nova
+25C-NBOMe||Cimbi-82||NBOMe-2C-C||2C-C-NBOMe||2C-C-NBOMe
+25i-NBOMe||25i||Cimbi-5||2C-I-NBOMe
+2C-B||Nexus||Bees||4-Bromo-2,5-dimethoxyphenethylamine
+2C-B-FLY||8-bromo-2,3,6,7-benzo-dihydro-difuran-ethylamine
+2C-C||4-Chloro-2,5-dimethoxyphenethylamine
+2C-D||2C-M||LE-25||2,5-Dimethoxy-4-methylphenethylamine
+2C-E||Eternity[1]||"Aquarust"[1]||2,5-Dimethoxy-4-ethylphenethylamine
+2C-I||2,5-Dimethoxy-4-iodophenethylamine
+2C-P||2,5-Dimethoxy-4-propylphenethylamine
+2C-T-2||Rosy||4-Ethylthio-2,5-dimethoxyphenethylamine
+2C-T-7||Beautiful||Blue Mystic||7th Heaven||2,5-Dimethoxy-4-(propylthio)phenethylamine
+4-AcO-DET||4-Acetoxy-DET||Ethacetin||4-Acetoxy-N,N-diethyltryptamine
+4-AcO-DMT||4-Acetoxy-DMT||Psilacetin||O-Acetylpsilocin||Synthetic mushrooms||4-Acetoxy-N,N-dimethyltryptamine
+4-HO-DiPT||Iprocin||4-Hydroxy-N,N-diisopropyltryptamine
+4-HO-DPT||Procin||4-Hydroxy-N,N-dipropyltryptamine
+4-AcO-MET||4-Acetoxy-MET||Metacetin||O-Acetylmetocin||4-Acetoxy-N-methyl-N-ethyltryptamine
+4-AcO-MiPT||Mipracetin||O-Acetylmiprocin||4-Acetoxy-N-isopropyl-N-methyltryptamine
+4-HO-MET||Metocin||Methylcybin||Colour||4-Hydroxy-N-methyl-N-ethyltryptamine
+4-HO-MiPT||Miprocin||4-Hydroxy-N-methyl-N-isopropyltryptamine
+5-MeO-DALT||Foxtrot||N,N-Diallyl-5-methoxytryptamine
+5-MeO-DMT||The God Molecule||Toad||Jaguar||5-Methoxy-N,N-dimethyltryptamine
+5-MeO-MiPT||Moxy||5-Methoxy-N-methyl-N-isopropyltryptamine
+AL-LAD||Aladdin||6-Allyl-6-nor-lysergic acid diethylamide
+AMT||αMT||Indopan||α-Methyltryptamine||alpha-methyltryptamine
+Bromo-DragonFLY||DOB-DragonFLY||B-DFLY||Dragonfly||8-bromo-4-(2-aminopropyl)benzodifuran
+DiPT||N,N-Diisopropyltryptamine
+DOB||Brolamfetamine||Bromo-DMA||4-Bromo-2,5-dimethoxyamphetamine
+DOC||2,5-Dimethoxy-4-chloroamphetamine
+DOI||2,5-Dimethoxy-4-iodoamphetamine
+DOM||STP (Serenity||Tranquility||and Peace)||2,5-Dimethoxy-4-methylamphetamine
+ETH-LAD||6-Ethyl-6-nor-lysergic acid diethylamide
+Ibogaine||Endabuse||Iboga||10-Methoxyibogamine
+LSA||Ergine||d-Lysergic acid amide / d-Lysergamide
+MDA||Sass||Sally||Tenamfetamine||3,4-Methylenedioxyamphetamine
+MiPT||N-Methyl-N-isopropyltryptamine
+MET||Methylethyltryptamine||N-Ethyl-N-methyltryptamine
+Psilocin||Psilocine||Psilocyn||Psilotsin||4-HO-DMT||4-OH-DMT||4-Hydroxy-N,N-dimethyltryptamine
+2-Fluoroketamine||Fluoroketamine||2-FK||2-FDCK||2-Fl-2'-Oxo-PCM
+3-MeO-PCE||Methoxyeticyclidine||3-Methoxyeticyclidine
+3-MeO-PCMo
+3-MeO-PCP||3-MeO||3-Methoxyphencyclidine
+4-MeO-PCP||Methoxydine||4-Methoxyphencyclidine
+DXM||DMO||DM||Dex||Robitussin||Delsym||DexAlone||Duract||Dextromethorphan
+Deschloroketamine||DCK||DXE||O-PCM||Deschloroketamine
+Ephenidine||NEDPA||Ephenidine
+Ketamine||K||Ket||Kitty||Special K||Cat Tranquilizer||Ketaset||Ketalar||Ketanest||Vitamin K||Purple||Jet||Ketamine
+Memantine||Memaxa||Ebixa||Namenda||Namenda XR||Namzaric (with donepezil||both extended-release)||Memantine
+Methoxetamine||MXE||Mexxy||3-MeO-2'-Oxo-PCE
+Methoxphenidine||Methoxyphenidine||MXP||2-MXP||2-MeO-Diphenidine
+O-PCE||Eticyclidone||2'-Oxo-PCE
+PCP||Angel Dust||Sherman||Sernyl||Wet||Dust||Supergrass||Boat||Tic Tac||Zoom||Phencyclidine
+Salvia||Salvia divinorum||Diviner's Sage||Ska María Pastora||Seer's Sage||Sally||Salvinorin A
+2M2B||2-methyl-2-butanol||2-methyl-2-butanol
+Alcohol||Booze||Liquor||Moonshine[1]||Sauce||Juice||Ethyl alcohol||EtOH
+Xanax||Alprazolam||Ksalol||Alprazolam
+Clonazepam||Klonopin||K-Pins||Rivotril||Clonazepam
+Codeine||3-methylmorphine
+Valium||Diastat||Mother's Little Helper||Apaurin||Diazepam
+Diclazepam||Ro5-3448||Chlorodiazepam||2'-chloro-diazepam
+Ethylmorphine||Codethyline||Dionine||3-ethylmorphine
+Etizolam||Etilaam||Etizest||Etizolam
+F-Phenibut||Fluorophenibut||Fluorobut||β-(4-flourophenyl)-GABA
+Gabapentin||Neurontin||Gabarone||Gralise||Gabapentin
+GBL||gamma-Butyrolactone||1,4-lactone||4-butyrolactone||4-hydroxybutyric acid lactone||gamma-hydroxybutyric acid lactone||and oxolan-2-one
+GHB||G||Xyrem||Sodium oxybate||gamma-Hydroxybutyric acid
+Heroin||H||Smack||Junk||Brown||Diacetylmorphine (Diamorphine)
+Vicodin (with paracetamol)||Zohydro ER (extended-release)||Hydrocodone
+Lorazepam||Ativan||Orfidal||Lorsilan||Lorazepam
+Methaqualone||Quaaludes||Ludes||Mandrax||Sopor||Quack||Vitamin Q||Soaper||Methaqualone
+O-Desmethyltramadol||O-DSMT
+OxyContin||Oxy||Roxicodone||Oxecta||OxyIR||Endone||Oxynor||Codilek||Oxydor||Redocam||Oxygesic||Oxycodone
+Phenibut||Fenibut||Phenybut||PhGABA||β-Phenyl-γ-aminobutyric acid
+Pregabalin||Lyrica||Nervalin||3-Isobutyl GABA
+Quetiapine||Seroquel||Xeroquel||Ketipinor
+Tianeptine||Stablon||Coaxil||Tatinol||Tianeptine
+Tramadol||Tramal||Tadol||Tramacur||Tramundin||Tramadol
+Zimovane||Imovane||Zopiclone
+Ambien||Intermezzo||Edluar||Zolpimist||Zolpidem
+5F-AKB48||5F-APINACA||5F-APINACA
+5F-PB-22
+Ab-fubi||AB-FUBINACA
+APICA||SDB-001||2NE1||APICA
+JWH-018||AM-678
+STS-135||5-fluoro-APICA
+2-FA||2-Fluoroamphetamine
+2-FMA||2-Fluoromethamphetamine
+3,4-CTMP||3,4-Dichloromethylphenidate
+3-FEA||3-Fluoroethamphetamine
+3-FPM||PAL-593||3-Fluorophenmetrazine
+4-FA||4-FMP||PAL-303||Flux||4-Fluoroamphetamine||para-Fluoroamphetamine
+5-APB||5-(2-Aminopropyl)benzofuran
+6-APB||Benzofury||6-(2-Aminopropyl)benzofuran
+6-APDB||6-(2-aminopropyl)-2,3-dihydrobenzofuran
+α-PVP||alpha-PVP||Flakka||Flak||O-2387||β-ketone-prolintane||Prolintanone||Gravel||alpha-pyrrolidinovalerophenone
+α-PHP||alpha-PHP||PV7||alpha-Pyrrolidinohexiophenone
+Amphetamine||Speed||Adderall||Pep||α-Methylphenethylamine
+Butylone||bk-MBDB||B1||β-keto-N-methylbenzodioxolylbutanamine
+Caffeine||1,3,7-Trimethylxanthine[1]
+Cocaine||Coke||Coca||Crack||Blow||Girl||White||Snow||Nose Candy||Chari||Benzoylmethylecgonine
+Desoxypipradol||2-DPMP||Ivory Wave||2-diphenylmethylpiperidine
+Dichloropane||RTI-111||(−)-2β-Carbomethoxy-3β-(3,4-dichlorophenyl)tropane
+Ethylphenidate||EPH||Ethylphenidate
+Ethylone||bk-MDEA||MDEC||3,4-methylenedioxy-N-ethylcathinone
+Hexen||Hex-en||NEH||Ethyl-Hexedrone||N-Ethylhexedrone||N-Ethyl-nor-hexedrone
+Isopropylphenidate||IPH||IPPH||Isopropylphenidate
+Lisdexamfetamine||Vyvanse||Elvanse||L-lysine-dextroamphetamine
+Mephedrone||4-MMC||Drone||M-CAT||Meow Meow||4-Methylmethcathinone
+MDAI||5,6-Methylenedioxy-2-aminoindane
+MDEA||MDE||Eve||3,4-Methylenedioxy-N-ethylamphetamine
+MDMA||Molly||Mandy||Emma||MD||Ecstasy||E||X||XTC||Rolls||Beans||3,4-Methylenedioxy-N-methylamphetamine
+MDPV||Bath Salts||NRG-1||3,4-Methylenedioxypyrovalerone
+Methamphetamine||Meth||Speed||Ice||Glass||Shard||Tina||Crank||Desoxyn||N-Methylamphetamine
+MPA||Methiopropamine
+Methylone||bk-MDMA||M1||MDMC||3,4-Methylenedioxy-N-methylcathinone
+Methylphenidate||Concerta||Methylin||Ritalin||Equasym XL||Methylphenidate
+Methylnaphthidate||HDMP-28||Methylnaphthidate
+N-Ethylpentedrone||NEP||Ethyl-Pentedrone||N-Ethyl-(nor)-pentedrone
+NM-2-AI||N-methyl-2-AI
+Armodafinil||Nuvigil||Waklert||Artvigil||R-Modawake||Neoresotyl||(R)-Modafinil
+Bromantane||Bromantan||Ladasten||Bromantane
+Choline||Choline
+Citicoline||Cytidine diphosphate choline
+N-Methylbisfluoromodafinil||Dehydroxyfluorafinil||Modafiendz||N-Methyl-4,4'-difluoro-modafinil
+N-Acetylcysteine||(2R)-2-acetamido-3-sulfanylpropanoic acid
+Modafinil||Alertec||Modavigil||Modiodal||Provigil||Modalert||Modafinil
+Piracetam||Avigilen||Memo-Puren||Nootron||Nootrop||Nootropil||Nootropyl||Normabrain||Norzetam||Geratam
+Tianeptine||Stablon||Coaxil||Tatinol||Tianeptine

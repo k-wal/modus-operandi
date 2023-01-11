@@ -95,7 +95,8 @@ class DrugsForumNLScraper():
 
 			thread_date = div.find('li', class_='structItem-startDate').find('time')['datetime'][0:10]
 
-			thread_comments = int(detail_div.findAll('dd')[0].text)
+			
+			thread_comments = int(detail_div.findAll('dd')[0].text.replace('K','000'))
 			
 			thread_views = detail_div.findAll('dd')[1].text
 			if 'K' in thread_views:
