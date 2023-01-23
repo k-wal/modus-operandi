@@ -45,10 +45,10 @@ class DrugsForumNLScraper():
 	def get_all_category_threads(self):
 		# for i in range(1,48):
 		# 	self.get_threads('research_chemicals',i)
-		for i in range(1,117):
-			self.get_threads('drugs_general',i)
-		# for i in range(1,114):
-		# 	self.get_threads('trip_reports',i)
+		# for i in range(107,117):
+		# 	self.get_threads('drugs_general',i)
+		for i in range(1,114):
+			self.get_threads('trip_reports',i)
 
 	# get threads and their details and call write function
 	def get_threads(self, category, page=1):
@@ -95,8 +95,9 @@ class DrugsForumNLScraper():
 
 			thread_date = div.find('li', class_='structItem-startDate').find('time')['datetime'][0:10]
 
-			
-			thread_comments = int(detail_div.findAll('dd')[0].text.replace('K','000'))
+			thread_comments = detail_div.findAll('dd')[0].text
+			if 'K' in thread_comments:
+				thread_comments = int(thread_comments.split('K')[0])*1000
 			
 			thread_views = detail_div.findAll('dd')[1].text
 			if 'K' in thread_views:
@@ -105,9 +106,9 @@ class DrugsForumNLScraper():
 			threads.append(DrugsForumNLThread(
 				url = thread_url,
 				title = thread_title,
-				username = thread_username,
-				user_id = thread_user_id,
-				user_url = thread_user_url,
+				# username = thread_username,
+				# user_id = thread_user_id,
+				# user_url = thread_user_url,
 				date = thread_date,
 				views = thread_views,
 				comments = thread_comments,
@@ -149,7 +150,10 @@ class DrugsForumNLScraper():
 			comment_id = int(article['data-content'].split('-')[-1])
 			comment_date = article.find('time')['datetime'][0:10]
 
-			thread_id = int(thread_url.split('.')[-1].replace('/','')[0:5])
+			try:
+				thread_id = int(thread_url.split('.')[-1].replace('/','')[0:5])
+			except:
+				thread_id = 000
 
 			# getting content of comment and removing quoted parts from it
 			message_body = article.find('article', class_="message-body")
@@ -164,10 +168,10 @@ class DrugsForumNLScraper():
 			content = content.replace('\n', ' ')
 
 			comments.append(Comment(
-				user_url = comment_user_url,
-				user_id = comment_user_id,
-				username = comment_username,
-				comment_id = comment_id,
+#				user_url = comment_user_url,
+#				user_id = comment_user_id,
+#				username = comment_username,
+#				comment_id = comment_id,
 				thread_id = thread_id,
 				thread_url = thread_url, 
 				content = content, 
@@ -178,7 +182,10 @@ class DrugsForumNLScraper():
 		# if next page exists, get comments from it
 		next_page = soup.find('a', class_='pageNavSimple-el--next')
 		if next_page:
-			comments.extend(self.get_comments_of_thread(self.url+next_page['href']))
+			try:
+				comments.extend(self.get_comments_of_thread(self.url+next_page['href']))
+			except:
+				pass
 		return comments
 
 

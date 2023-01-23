@@ -206,9 +206,9 @@ class DrugsForumInfoScraper():
 			threads.append(DrugsForumInfoThread(
 				url = thread_url,
 				title = thread_title,
-				username = thread_username,
+			#	username = thread_username,
 			#	user_id = thread_user_id,
-				user_url = thread_user_url,
+			#	user_url = thread_user_url,
 				views = thread_views,
 				comments = thread_comments,
 				thread_id = thread_id,
