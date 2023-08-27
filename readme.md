@@ -37,6 +37,13 @@ This research is a prototype for detection of NPS using online indicators. For m
 └── readme.md
 ```
 
+* All datasets are present in corpus/forums and corpus/trimbos.
+* Source files for data collection can be found in scrapers/forums.
+* Timeseries datasets (after aggregation) can be found in analysis/timseries and analysis/timseries_info.
+* Notebook for analysis is analysis/drugsforum.ipynb.
+* Flagging system is present in dashboard/search_nl.ipynb
+
+
 ## Methodology
 
 ### Data Collection
@@ -45,8 +52,6 @@ Custom scrapers are created from Drugsforum.info and Drugsforum.nl. These scrape
 Reddit API is used to scrape information from subreddits about drugs. In addition to thread title and comments, upvotes are per thread/comment are stored.
 
 To compare online results with real-life data, data collected by the Trimbos institute is used. This data has been combined from annual reports released by the Trimbos institute, where number of occurrences of drugs in lab tests is released for 5 frequent drugs (2C-B, 3-MMC, 4-MMC, 4-FA, and 4-FMA).
-
-Source files for data collection can be found in scrapers/forums. All datasets are present in corpus/forums and corpus/trimbos.
 
 ### Data Aggregation
 
@@ -60,12 +65,8 @@ First, threads mentioning D (and its known synonyms) are filtered. Then, the ind
 |Drugsforum.nl|Mentions, Comments, Views|
 |Drugsforum.info|Mentions, Comments, Views|
 
-Timeseries datasets can be found in analysis/timseries and analysis/timseries_info.
-
 ### Statistical Analysis
 In order to reduce the impact of spikes in the online data, first a smoothing process is performed on popularity indicator timeseries. This is done in two separate ways: using an averaging filter per year, and by conducting piecewise linear regression with 12 breakpoints. To quantify the similarity between online values and Trimbos data, Pearson correlation is performed.
-
-Notebook for analysis is analysis/drugsforum.ipynb.
 
 ### Results
 Among the popularity metrics, number of views resulted in hightes average correlation with Trimbos lab data. The correlation values are presented int eh following table:
@@ -92,5 +93,3 @@ The flagging system calculates the following drugs:
 * with largest increase in the past 6 months
 * with largest number of views in the past 3 months
 * that have occurred newly in the past 3 months
-
-Flagging system is present in dashboard.
